@@ -5,6 +5,8 @@
 {% block body %}
 <div class="example-wrapper">
     <h1>Mon compte</h1>
+    <p>Bienvenue {{ app.user.firstname }} {{ app.user.lastname }} !</p>
+    <a href={{ path("app_modify_password") }}>Modifier mdp</a>
     <a href={{ path("app_logout") }}>Se déconnecter</a>
 </div>
 {% endblock %}

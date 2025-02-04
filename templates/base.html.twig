@@ -54,10 +54,20 @@
                 </div>
             </nav>
         </header>
+        <div class="container mt-5">
+            {% for label, messages in app.flashes %}
+                {% for message in messages %}
+                    <div class="mt-4 alert alert-{{ label }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+            {% include('account/_menu.html.twig') %}
+            {% block body %}
+                
+            {% endblock %}
+        </div>
 
-        {% block body %}
-        
-        {% endblock %}
 
         <footer class="container">
             <p>
