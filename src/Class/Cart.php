@@ -30,6 +30,11 @@ class Cart
     $this->requestStack->getSession()->set("cart", $cart);
   }
 
+  public function clear(): void
+  {
+    $this->requestStack->getSession()->set("cart", []);
+  }
+
   public function delete($product): void
   {
     $cart = $this->requestStack->getSession()->get("cart", []);

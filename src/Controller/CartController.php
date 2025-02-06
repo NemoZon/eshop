@@ -35,6 +35,16 @@ class CartController extends AbstractController
         return $this->redirect($request->headers->get('referer'));
     }
 
+    #[Route('/cart/clear', name: 'app_cart_clear')]
+    public function clear(Request $request, Cart $cart): Response
+    {
+        $cart->clear();
+
+        $this->addFlash('danger', 'Panier vidé');
+
+        return $this->redirect($request->headers->get('referer'));
+    }
+
     #[Route('/mon-panier', name: 'app_cart')]
     public function index(Cart $cart): Response
     {
