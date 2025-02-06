@@ -22,9 +22,11 @@ class LoginController extends AbstractController
             'last_username' => $lastUsername
         ]);
     }
+
     #[Route('/deconnexion', name: 'app_logout', methods: ['GET'])]
-    public function logout(): never
+    public function logout (): Response
     {
-        throw new \Exception('This should never be reached!');
+        throw new \Exception('logout');
     }
+
 }

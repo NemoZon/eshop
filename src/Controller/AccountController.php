@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class AccountController extends AbstractController
 {
-    #[Route('/account', name: 'app_account')]
+    #[Route('/mon-compte', name: 'app_account')]
     public function index(): Response
     {
         return $this->render('account/index.html.twig', [
@@ -20,26 +20,35 @@ class AccountController extends AbstractController
         ]);
     }
 
-    #[Route('/modifier-mdp', name: 'app_modify_password')]
-    public function modifyPwd(Request $request, UserPasswordHasherInterface $passwordHasher, EntityManagerInterface $em): Response
+    #[Route('/modifier-mot-de-passe', name: 'app_modifyPwd')]
+    public function modifyPwd ( Request $request, UserPasswordHasherInterface $passwordHasher, EntityManagerInterface $entityManager): Response
     {
+        //on recupere l'user en cours
         $user = $this->getUser();
-
+        //j'embarque l'user dans le formulaire + j'envoi passwordHasher à notre form
         $form = $this->createForm(PasswordUserType::class, $user, [
             'passwordHasher' => $passwordHasher,
         ]);
 
-        $form->handleRequest($request);
+        // écoute la soumission du form
+        $form->handleRequest( $request );
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em->flush();
-            $this->addFlash('success', 'Votre mot de passe a bien été modifié');
+        if ( $form->isSubmitted() && $form->isValid() ) {
+            //envoyer en base de données (update) flush
+            $entityManager->flush();
+
+            //afficher un flash message de succes
+            $this->addFlash(
+                'success',
+                'Mot de passe modifié'
+            );
+
             return $this->redirectToRoute('app_account');
         }
 
+
         return $this->render('account/modifyPwd.html.twig', [
-            'pwdform' => $form->createView(),
-            'password_hasher' => $passwordHasher,
+            'modifyPwd' => $form->createView(),
         ]);
     }
 }

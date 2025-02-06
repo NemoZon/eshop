@@ -10,6 +10,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
+
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -36,7 +37,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $firstname = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $lastname = null;
+    private ?string $name = null;
 
     public function getId(): ?int
     {
@@ -125,14 +126,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getLastname(): ?string
+    public function getName(): ?string
     {
-        return $this->lastname;
+        return $this->name;
     }
 
-    public function setLastname(string $lastname): static
+    public function setName(string $name): static
     {
-        $this->lastname = $lastname;
+        $this->name = $name;
 
         return $this;
     }

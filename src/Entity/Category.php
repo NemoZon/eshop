@@ -24,7 +24,7 @@ class Category
     /**
      * @var Collection<int, Product>
      */
-    #[ORM\OneToMany(targetEntity: Product::class, mappedBy: 'product')]
+    #[ORM\OneToMany(targetEntity: Product::class, mappedBy: 'category')]
     private Collection $products;
 
     public function __construct()
@@ -39,6 +39,10 @@ class Category
 
     public function getName(): ?string
     {
+        return $this->name;
+    }
+
+    public function __toString(){
         return $this->name;
     }
 
@@ -73,7 +77,7 @@ class Category
     {
         if (!$this->products->contains($product)) {
             $this->products->add($product);
-            $product->setProduct($this);
+            $product->setCategory($this);
         }
 
         return $this;
@@ -83,8 +87,8 @@ class Category
     {
         if ($this->products->removeElement($product)) {
             // set the owning side to null (unless already changed)
-            if ($product->getProduct() === $this) {
-                $product->setProduct(null);
+            if ($product->getCategory() === $this) {
+                $product->setCategory(null);
             }
         }
 

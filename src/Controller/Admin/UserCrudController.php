@@ -19,17 +19,19 @@ class UserCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setEntityLabelInSingular("Utilisateur")
-            ->setEntityLabelInPlural("Utilisateurs");
+            ->setEntityLabelInSingular('Utilisateur')
+            ->setEntityLabelInPlural('Utilisateurs')
+            ;
     }
+
 
     public function configureFields(string $pageName): iterable
     {
         return [
-            TextField::new('email')->onlyOnIndex(),
             TextField::new('firstName')->setLabel('Prénom'),
-            TextField::new('lastName')->setLabel('Nom'),
-
+            TextField::new('name')->setLabel('Nom'),
+            TextField::new('email')->setLabel('Email')->onlyOnIndex(),
         ];
     }
+
 }
