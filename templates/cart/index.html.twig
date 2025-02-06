@@ -34,11 +34,7 @@
             </tbody>
         </table>
         <div class="text-right">
-            {% set total = 0 %}
-            {% for item in cart %}
-                {% set total = total + (item.product.pricewt * item.quantity) %}
-            {% endfor %}
-            <h3>Total: {{ total|price }}</h3>
+            <h3>Total: {{ totalPrice|price }}</h3>
             <a href="" class="btn btn-success">Commander</a>
             <a href="{{ path('app_cart_clear') }}" class="btn btn-danger">Vider le panier</a>
         </div>

@@ -56,4 +56,24 @@ class Cart
   {
     return $this->requestStack->getSession()->get("cart", []);
   }
+
+  public function getTotalQuantity(): int
+  {
+    $totalQuantity = 0;
+    $cart = $this->requestStack->getSession()->get("cart", []);
+    foreach ($cart as $product) {
+      $totalQuantity += $product['quantity'];
+    }
+    return $totalQuantity;
+  }
+
+  public function getTotalPrice(): int
+  {
+    $total = 0;
+    $cart = $this->requestStack->getSession()->get("cart", []);
+    foreach ($cart as $product) {
+      $total += $product['quantity'] * $product['product']->getPriceWt();
+    }
+    return $total;
+  }
 }
