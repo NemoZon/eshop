@@ -15,11 +15,12 @@ class CategoryController extends AbstractController
         //recuperer la categorie qui correspond au slug
         $category = $categoryRepository->findOneBy(['slug' => $slug]);
 
-
-
+        if ($category === null) {
+            return $this->redirectToRoute('app_home', );
+        }
 
         return $this->render('category/index.html.twig', [
-        'category' => $category,
+            'category' => $category,
         ]);
     }
 }

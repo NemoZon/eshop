@@ -19,10 +19,18 @@
     <script src="https://unpkg.com/feather-icons"></script>
 </head>
 <body>
+<style>
+    .fixed-alert {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 1050; /* Ensure it is above other components */
+    }
+</style>
 <header data-bs-theme="dark">
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Ma boutique en ligne</a>
+            <a class="navbar-brand" href="{{ path('app_home') }}">Ma boutique en ligne</a>
             <button
                     class="navbar-toggler"
                     type="button"
@@ -36,18 +44,11 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                    {% for category in allCategories %}
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        <a class="nav-link" href="/categorie/{{ category.slug }}">{{ category.name|capitalize }}</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/categorie/casquette">Casquettes</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/categorie/tee-shirt">Tee shirts</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/categorie/sacs">Sacs</a>
-                    </li>
+                    {% endfor %}
                 </ul>
                 <div class="speed-menu">
 
@@ -61,8 +62,12 @@
                 {% endif %}
 
 
-                    <a href="">
-                        <i data-feather="shopping-cart"></i></a>
+                    <a href="{{ path('app_cart') }}">
+                        <i data-feather="shopping-cart"></i>
+                        {% if allCategories|length %}
+                        {% endif %}
+                        <span class="badge badge-pill badge-danger">{{ allCategories|length }}</span>
+                    </a>
                 </div>
 
             </div>
@@ -75,7 +80,7 @@
     {# génération de nos flash messages #}
     {% for label, messages in app.flashes %}
         {% for message in messages %}
-            <div class="mt-4 alert alert-{{ label }}">
+            <div class="mt-4 alert alert-{{ label }} fixed-alert">
                 {{ message }}
             </div>
         {% endfor %}

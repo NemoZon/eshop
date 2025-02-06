@@ -6,10 +6,12 @@
 
     <div class="row">
         {% for product in category.products %}
-            <div class="col-md-3 text-center">
-                <img src="/uploads/{{ product.illustration }}" alt="{{ product.name }}" class="img-fluid"/>
-                <strong>{{ product.name }}</strong>
-                <span class="d-block">{{ product.pricewt }}</span>
+            <div class="col-md-3 text-center card">
+                <a href="{{ path('app_product', {'slug': product.slug}) }}">
+                    <img src="/uploads/{{ product.illustration }}" alt="{{ product.name }}" class="img-fluid"/>
+                    <strong>{{ product.name }}</strong>
+                    <span class="d-block">{{ product.pricewt|price }}</span>
+                </a>
             </div>
 
         {% endfor %}
