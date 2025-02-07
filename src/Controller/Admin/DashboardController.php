@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Carrier;
 use App\Entity\Category;
 use App\Entity\Product;
 use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminDashboard;
@@ -25,8 +26,8 @@ class DashboardController extends AbstractDashboardController
         // return $this->redirectToRoute('admin_user_index');
         //
         // 1.2) Same example but using the "ugly URLs" that were used in previous EasyAdmin versions:
-         $adminUrlGenerator = $this->container->get(AdminUrlGenerator::class);
-         return $this->redirect($adminUrlGenerator->setController(UserCrudController::class)->generateUrl());
+        $adminUrlGenerator = $this->container->get(AdminUrlGenerator::class);
+        return $this->redirect($adminUrlGenerator->setController(UserCrudController::class)->generateUrl());
 
         // Option 2. You can make your dashboard redirect to different pages depending on the user
         //
@@ -51,5 +52,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToDashboard('Utilisateurs', 'fa fa-users');
         yield MenuItem::linkToCrud('Catégories', 'fa fa-list', Category::class);
         yield MenuItem::linkToCrud('Produits', 'fa fa-shopping-basket', Product::class);
+        yield MenuItem::linkToCrud('Transporteur', 'fa fa-delivery', Carrier::class);
     }
 }

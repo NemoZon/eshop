@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Form\RegisterType;
+use App\Form\RegisterUserType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,7 +21,7 @@ class RegisterController extends AbstractController
         $user = new User();
 
         //creation du formulaire depuis RegisterType et on passe user en parametre
-        $form= $this->createForm(RegisterType::class, $user);
+        $form = $this->createForm(RegisterUserType::class, $user);
         //écoute la soumission du form en prenant request
         $form->handleRequest($request);
 

@@ -1,0 +1,39 @@
+  {{ form_start(addressForm) }}
+    <div class="d-flex flex-column gap-3">
+      <div class="form-group">
+        {{ form_label(addressForm.firstName) }}
+        {{ form_widget(addressForm.firstName, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(addressForm.firstName) }}
+      </div>
+      <div class="form-group">
+        {{ form_label(addressForm.lastName) }}
+        {{ form_widget(addressForm.lastName, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(addressForm.lastName) }}
+      </div>
+      <div class="form-group">
+        {{ form_label(addressForm.address) }}
+        {{ form_widget(addressForm.address, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(addressForm.address) }}
+      </div>
+      <div class="form-group">
+        {{ form_label(addressForm.postalCode) }}
+        {{ form_widget(addressForm.postalCode, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(addressForm.postalCode) }}
+      </div>
+      <div class="form-group">
+        {{ form_label(addressForm.city) }}
+        {{ form_widget(addressForm.city, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(addressForm.city) }}
+      </div>
+      <div class="form-group">
+        {{ form_label(addressForm.country) }}
+        {{ form_widget(addressForm.country, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(addressForm.country) }}
+      </div>
+      <div class="form-group">
+        {{ form_label(addressForm.phone) }}
+        {{ form_widget(addressForm.phone, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(addressForm.phone) }}
+      </div>
+    </div>
+  {{ form_end(addressForm) }}

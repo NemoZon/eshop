@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<div class="container mt-4">
+  <h1 class="mb-4">Adresses</h1>
+  <div class="row">
+    {% for address in app.user.addresses %}
+      <div class="col-md-6 mb-3">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">{{ address.firstName }} {{ address.lastName }}</h5>
+            <p class="card-text">
+              {{ address.address }}<br>
+              {{ address.postalCode }} {{ address.city }}<br>
+              {{ address.country }}<br>
+              <strong>Téléphone:</strong> {{ address.phone }}
+            </p>
+            <a href="{{ path('app_modify_address', {'id': address.id}) }}" class="btn btn-primary">Modifier</a>
+            <a href="{{ path('app_delete_address', {'id': address.id}) }}" class="btn btn-danger">Supprimer</a>
+          </div>
+        </div>
+      </div>
+    {% else %}
+      <div class="col-12">
+        <p class="text-muted">Vous n'avez pas encore ajouté d'adresse.</p>
+      </div>
+    {% endfor %}
+  </div>
+  <div class="mt-4">
+    <a href="{{ path('app_add_address') }}" class="btn btn-success">Ajouter une nouvelle adresse</a>
+  </div>
+</div>
+{% endblock %}
