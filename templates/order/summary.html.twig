@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Résumé de la commande{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1 class="mb-4">Résumé de la commande</h1>
+    <div class="row">
+        <div class="col-md-8">
+            <h3>Votre panier</h3>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Produit</th>
+                        <th>Quantité</th>
+                        <th>Prix Unitaire</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in cart %}
+                        <tr>
+                            <td>{{ item.product.name }}</td>
+                            <td>{{ item.quantity }}</td>
+                            <td>{{ item.product.pricewt }} $</td>
+                            <td>{{ item.product.pricewt * item.quantity }} $</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <h3>Total : {{ totalWt + choices.carriers.price }} $</h3>
+        </div>
+        <div class="col-md-4">
+            <h3>Informations de livraison</h3>
+            <ul class="list-group">
+                <li class="list-group-item"><strong>Nom :</strong> {{ choices.addresses.firstName }} {{ choices.addresses.lastName }}</li>
+                <li class="list-group-item"><strong>Adresse :</strong> {{ choices.addresses.address }}</li>
+                <li class="list-group-item"><strong>Code Postal :</strong> {{ choices.addresses.postalCode }}</li>
+                <li class="list-group-item"><strong>Ville :</strong> {{ choices.addresses.city }}</li>
+                <li class="list-group-item"><strong>Pays :</strong> {{ choices.addresses.country }}</li>
+                <li class="list-group-item"><strong>Téléphone :</strong> {{ choices.addresses.phone }}</li>
+                <li class="list-group-item"><strong>Livreur :</strong> {{ choices.carriers.name }}</li>
+                <li class="list-group-item"><strong>Cout de livraison:</strong> {{ choices.carriers.price|price }}</li>
+            </ul>
+        </div>
+    </div>
+    <div class="mt-4">
+        <a href="{{ path('app_payment', { 'id_order': order.id }) }}" class="btn btn-success">Procéder au paiement</a>
+    </div>
+</div>
+{% endblock %}

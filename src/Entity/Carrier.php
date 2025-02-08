@@ -50,7 +50,10 @@ class Carrier
 
         return $this;
     }
-
+    public function __toString(): string
+    {
+        return $this->name . " | " . $this->description . " | " . $this->price . "€";
+    }
     public function getPrice(): ?float
     {
         return $this->price;

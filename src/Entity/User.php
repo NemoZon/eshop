@@ -166,6 +166,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->addresses;
     }
 
+    public function __toString(): string
+    {
+        return $this->firstname . " " . $this->name;
+    }
+
     public function addAddress(Address $address): static
     {
         if (!$this->addresses->contains($address)) {

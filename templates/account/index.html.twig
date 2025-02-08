@@ -9,6 +9,9 @@
             <h1 class="mb-4">Mon compte</h1>
             <p class="lead">Bienvenue {{ app.user.firstname }} {{ app.user.name }} !</p>
             <div class="list-group">
+                <a href="{{ path('app_order') }}" class="list-group-item list-group-item-action">
+                    <i class="bi bi-key"></i> Mes commandes
+                </a>
                 <a href="{{ path('app_modifyPwd') }}" class="list-group-item list-group-item-action">
                     <i class="bi bi-key"></i> Modifier mot de passe
                 </a>

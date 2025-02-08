@@ -137,4 +137,8 @@ class Address
 
         return $this;
     }
+    public function __toString(): string
+    {
+        return $this->firstName . " " . $this->lastName . " | " . $this->address . " | " . $this->postalCode . " " . $this->city . " | " . $this->country . " | " . $this->phone;
+    }
 }
